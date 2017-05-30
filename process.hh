@@ -1,6 +1,6 @@
 #pragma once
 
-class process {
+class Process {
 private:
 	int id;
 	int arrival_time;
@@ -8,8 +8,8 @@ private:
 	int completion_time;
 	int ticket_number = 0;
 public:
-	process(int, int, int);
-	~process() { }
+	Process(int, int, int);
+	~Process() { }
 	int get_id();
 	int get_arrival_time();
 	int get_burst_time();
