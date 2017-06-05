@@ -3,12 +3,12 @@
 #include <memory>
 #include <unistd.h>
 #include <fstream>
-#include "scheduler.hh"
-#include "shortest_job_first.hh"
-#include "round_robin.hh"
-#include "rate_monotonic.hh"
-#include "earliest_job_first.hh"
-#include "lottery.hh"
+#include "Scheduler.hh"
+#include "SJF.hh"
+#include "RR.hh"
+#include "RM.hh"
+#include "EDF.hh"
+#include "LT.hh"
 
 void print_usage() {
 	std::cout << "Usage: command -i [input_file] -s [scheduler_type]\n"
@@ -95,6 +95,6 @@ int main(int argc, char** argv) {
     while (!scheduler->is_finished()) {
         std::cout << scheduler->get_next_event();
     }
-
+    return 0;
 
 }

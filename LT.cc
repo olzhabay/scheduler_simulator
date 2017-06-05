@@ -1,5 +1,5 @@
 #include <netinet/in.h>
-#include "lottery.hh"
+#include "LT.hh"
 
 Lottery::Lottery() {
 
@@ -14,7 +14,7 @@ Lottery::~Lottery() {
 }
 
 void Lottery::add_new_process(Process) {
-    Scheduler::add_new_process( < unnamed >);
+
 }
 
 std::string Lottery::get_next_event() {
@@ -23,8 +23,4 @@ std::string Lottery::get_next_event() {
 
 bool Lottery::is_finished() {
     return Scheduler::is_finished();
-}
-
-bool Lottery::compare(Process, Process) {
-    return false;
 }

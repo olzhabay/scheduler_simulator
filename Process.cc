@@ -1,4 +1,4 @@
-#include "process.hh"
+#include "Process.hh"
 
 Process::Process(int id, int arrival_time, int burst_time) {
 	this->id = id;
@@ -32,4 +32,12 @@ void Process::set_resource_type(int) {
 
 int Process::get_resource_type() {
     return resource_type;
+}
+
+void Process::set_priority(int priority) {
+    this->priority = priority;
+}
+
+int Process::get_priority() {
+    return priority;
 }

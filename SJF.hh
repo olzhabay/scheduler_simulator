@@ -1,6 +1,6 @@
 #pragma once
 
-#include "scheduler.hh"
+#include "Scheduler.hh"
 
 class ShortestJobFirst : public Scheduler {
 private:
@@ -11,5 +11,4 @@ public:
 	void add_new_process(Process);
 	std::string get_next_event();
 	bool is_finished();
-	bool compare(Process, Process);	
 };
