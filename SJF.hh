@@ -8,7 +8,7 @@ private:
 public:
 	ShortestJobFirst(bool preemptive = true);
 	~ShortestJobFirst();
-	void add_new_process(Process);
+	void add_new_process(Process&);
 	std::string get_next_event();
 	bool is_finished();
 };

@@ -1,6 +1,6 @@
 #include "EDF.hh"
 
-EarliestDeadlineFirst::EarliestDeadlineFirst(int end_time) {
+EarliestDeadlineFirst::EarliestDeadlineFirst(uint32_t end_time) {
 
 }
 
@@ -8,7 +8,7 @@ EarliestDeadlineFirst::~EarliestDeadlineFirst() {
 
 }
 
-void EarliestDeadlineFirst::add_new_process(Process) {
+void EarliestDeadlineFirst::add_new_process(Process &process) {
 
 }
 

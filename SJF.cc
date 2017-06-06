@@ -8,7 +8,7 @@ ShortestJobFirst::~ShortestJobFirst() {
 
 }
 
-void ShortestJobFirst::add_new_process(Process) {
+void ShortestJobFirst::add_new_process(Process &process) {
 
 }
 

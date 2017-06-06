@@ -23,15 +23,15 @@ void print_usage() {
 }
 
 std::shared_ptr<Scheduler> get_scheduler(std::string type, int quantum, int end_time) {
-    if (type.compare("SJF")) {
+    if (!type.compare("SJF")) {
         return std::make_shared<ShortestJobFirst>();
-    } else if (type.compare("RR")) {
+    } else if (!type.compare("RR")) {
         return std::make_shared<RoundRobin>(quantum);
-    } else if (type.compare("RM")) {
+    } else if (!type.compare("RM")) {
         return std::make_shared<RateMonotonic>(end_time);
-    } else if (type.compare("EDF")) {
+    } else if (!type.compare("EDF")) {
         return std::make_shared<EarliestDeadlineFirst>(end_time);
-    } else if (type.compare("LT")) {
+    } else if (!type.compare("LT")) {
         return std::make_shared<Lottery>();
     } else {
         throw "Wrong argument for scheduler_type\n";
@@ -41,10 +41,10 @@ std::shared_ptr<Scheduler> get_scheduler(std::string type, int quantum, int end_
 int main(int argc, char** argv) {
 	std::string file_name;
 	std::string type;
-	int quantum;
-	int end_time;
+	int quantum = 0;
+	int end_time = 0;
     int c;
-	while ((c = getopt(argc, argv, "i:s:q::e::")) != -1) {
+	while ((c = getopt(argc, argv, "i:s:q:e:")) != -1) {
         switch(c) {
             case 'i':
                 file_name = optarg;
@@ -53,10 +53,12 @@ int main(int argc, char** argv) {
                 type = optarg;
                 break;
             case 'q':
-                quantum = std::stoi(optarg);
+                if (optarg != nullptr)
+                    quantum = std::stoi(optarg);
                 break;
             case 'e':
-                end_time = std::stoi(optarg);
+                if (optarg != nullptr)
+                    end_time = std::stoi(optarg);
                 break;
             case '?':
             default:
@@ -72,15 +74,16 @@ int main(int argc, char** argv) {
         print_usage();
         return 1;
     }
-    std::ifstream input(file_name);
-    while (!input.eof()) {
-        char* line;
-        input.getline(line, 255);
+    std::ifstream input;
+    input.open(file_name);
+    while (!input.eof() && input.good()) {
+        std::string line;
+        getline(input, line);
         std::stringstream ss(line);
         int id, arrival_time, burst_time;
         ss >> id >> arrival_time >> burst_time;
         Process process(id, arrival_time, burst_time);
-        if (scheduler->get_type().compare("LT")) {
+        if (!scheduler->get_type().compare("LT")) {
             int ticket_number, resource_type;
             ss >> ticket_number;
             process.set_ticket_number(ticket_number);

@@ -1,6 +1,6 @@
 #include "RM.hh"
 
-RateMonotonic::RateMonotonic(int end_time) {
+RateMonotonic::RateMonotonic(uint32_t end_time) {
 
 }
 
@@ -8,7 +8,7 @@ RateMonotonic::~RateMonotonic() {
 
 }
 
-void RateMonotonic::add_new_process(Process) {
+void RateMonotonic::add_new_process(Process &process) {
 
 }
 

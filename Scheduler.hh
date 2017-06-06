@@ -9,13 +9,15 @@ class Scheduler {
 public:
 	Scheduler() { };
 	virtual ~Scheduler() = default;
-	virtual void add_new_process(Process) = 0;
+	virtual void add_new_process(Process&) = 0;
 	virtual std::string get_next_event() { };
 	virtual bool is_finished() { };
 	std::string get_type() { return type; }
     struct Compare {
         bool operator()(Process& p1, Process& p2) {
-            return p1.get_priority() < p2.get_priority();
+            return p1.get_priority() != p2.get_priority() ?
+                   p1.get_priority() < p2.get_priority() :
+                   p1.get_id() > p2.get_id();
         }
     };
 protected:

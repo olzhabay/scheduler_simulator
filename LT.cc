@@ -5,7 +5,7 @@ Lottery::Lottery() {
 
 }
 
-Lottery::Lottery(int) {
+Lottery::Lottery(uint32_t) {
 
 }
 
@@ -13,7 +13,7 @@ Lottery::~Lottery() {
 
 }
 
-void Lottery::add_new_process(Process) {
+void Lottery::add_new_process(Process &process) {
 
 }
 

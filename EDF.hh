@@ -4,11 +4,11 @@
 
 class EarliestDeadlineFirst : public Scheduler {
 private:
-    int end_time;
+    uint32_t end_time;
 public:
-    EarliestDeadlineFirst(int end_time = 0);
+    EarliestDeadlineFirst(uint32_t end_time = 0);
     ~EarliestDeadlineFirst();
-    void add_new_process(Process);
+    void add_new_process(Process&);
     std::string get_next_event();
     bool is_finished();
 };
