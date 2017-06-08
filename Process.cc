@@ -30,7 +30,7 @@ uint32_t Process::get_id() {
 	return id;
 }
 
-uint32_t Process::get_arrival_time() {
+uint32_t Process::get_arrival_time()const {
 	return arrival_time;
 }
 

@@ -1,4 +1,5 @@
 #include <sstream>
+#include <iostream>
 #include <climits>
 #include "RR.hh"
 
@@ -11,31 +12,42 @@ RoundRobin::~RoundRobin() {
 }
 
 void RoundRobin::add_new_process(Process &process) {
-    process.set_priority(INT_MAX - process.get_arrival_time());
-    queue.push(process);
+    arrival_queue.push(process);
+    //process.set_priority(INT_MAX - process.get_arrival_time());
+    //queue.push(process);
 }
 
 std::string RoundRobin::get_next_event() {
     std::stringstream ss;
+    while (!arrival_queue.empty() && arrival_queue.top().get_arrival_time() <= time) {
+        Process process = arrival_queue.top();
+        process.set_priority(INT_MAX - process.get_arrival_time());
+        arrival_queue.pop();
+        queue.push(process);
+    }
+    if (queue.empty()) {
+        time = arrival_queue.top().get_arrival_time();
+        return ss.str();
+    }
     Process process = queue.top();
     queue.pop();
-    if (time < process.get_arrival_time()) time = process.get_arrival_time();
-    if (process.get_id() != prev_process_id)
+    if (prev_process != process.get_id())
         ss << time << ": schedule P" << process.get_id() << "\n";
-    if (quantum < process.get_burst_time()) {
-        time += quantum;
-        process.set_burst_time(process.get_burst_time() - quantum);
-        process.set_priority(process.get_priority() - quantum);
-        queue.push(process);
-        prev_process_id = process.get_id();
-    } else {
-        time += process.get_burst_time();
-        process.set_burst_time(0);
-        ss << time << ": terminate P" << process.get_id() << "\n";
-    }
+    do {
+        prev_process = process.get_id();
+        uint32_t comp_time = quantum < process.get_burst_time() ? quantum : process.get_burst_time();
+        time += comp_time;
+        process.set_burst_time(process.get_burst_time() - comp_time);
+        process.set_priority(INT_MAX - time);
+        if (process.get_burst_time() == 0) {
+            ss << time << ": terminate P" << process.get_id() << "\n";
+        } else {
+            queue.push(process);
+        }
+    } while (queue.empty() && arrival_queue.empty() && process.get_burst_time() > 0);
     return ss.str();
 }
 
 bool RoundRobin::is_finished() {
-    return queue.empty();
+    return queue.empty() && arrival_queue.empty();
 }

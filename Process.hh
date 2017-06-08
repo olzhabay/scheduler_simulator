@@ -14,7 +14,7 @@ public:
     Process& operator=(const Process&);
 	~Process() { }
     uint32_t get_id();
-    uint32_t get_arrival_time();
+    uint32_t get_arrival_time()const;
     uint32_t get_burst_time();
     void set_burst_time(uint32_t);
     uint32_t get_ticket_number();

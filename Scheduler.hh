@@ -13,14 +13,16 @@ public:
 	virtual std::string get_next_event() { };
 	virtual bool is_finished() { };
 	std::string get_type() { return type; }
-    struct Compare {
+    struct ComparePriority {
         bool operator()(Process& p1, Process& p2) {
             return p1.get_priority() != p2.get_priority() ?
                    p1.get_priority() < p2.get_priority() :
-                   p1.get_id() > p2.get_id();
+                   (p1.get_arrival_time() != p2.get_arrival_time() ?
+                    p1.get_arrival_time() > p2.get_arrival_time() :
+                    p1.get_id() > p2.get_id());
         }
     };
 protected:
-    std::priority_queue<Process, std::vector<Process>, Compare> queue;
+    std::priority_queue<Process, std::vector<Process>, ComparePriority> queue;
     std::string type;
 };
