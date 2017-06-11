@@ -13,7 +13,6 @@ public:
 	virtual void add_new_process(std::stringstream&) = 0;
 	virtual std::string get_next_event() { };
 	virtual bool is_finished() { };
-	std::string get_type() { return type; }
     struct ComparePriority {
         bool operator()(Process& p1, Process& p2) {
             return p1.get_priority() != p2.get_priority() ?
