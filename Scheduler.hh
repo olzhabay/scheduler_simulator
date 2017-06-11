@@ -23,7 +23,16 @@ public:
                     p1.get_id() > p2.get_id());
         }
     };
+
+    struct CompareArrival {
+        bool operator()(Process& p1, Process& p2) {
+            return p1.get_arrival_time() != p2.get_arrival_time() ?
+                   p1.get_arrival_time() > p2.get_arrival_time() :
+                   p1.get_id() > p2.get_id();
+        }
+    };
+
 protected:
+    std::priority_queue<Process, std::vector<Process>, CompareArrival> arrival_queue;
     std::priority_queue<Process, std::vector<Process>, ComparePriority> queue;
-    std::string type;
 };
