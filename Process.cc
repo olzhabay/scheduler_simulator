@@ -78,7 +78,7 @@ void Process::set_priority(uint32_t priority) {
     this->priority = priority;
 }
 
-uint32_t Process::get_priority() {
+uint32_t Process::get_priority()const {
     return priority;
 }
 

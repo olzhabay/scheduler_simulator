@@ -11,6 +11,7 @@ private:
 	uint32_t resource_type = 0;
     uint32_t priority = 0;
 public:
+    Process() {}
 	Process(uint32_t , uint32_t , uint32_t);
     Process(uint32_t , uint32_t , uint32_t , uint32_t , uint32_t);
     Process(const Process&);
@@ -26,7 +27,7 @@ public:
     uint32_t get_resource_type();
     void set_resource_type(uint32_t);
     void set_priority(uint32_t);
-    uint32_t get_priority();
+    uint32_t get_priority()const;
     uint32_t get_period();
     uint32_t get_processing_time();
 };
