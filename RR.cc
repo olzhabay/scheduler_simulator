@@ -1,5 +1,3 @@
-#include <sstream>
-#include <iostream>
 #include <climits>
 #include "RR.hh"
 
@@ -11,10 +9,11 @@ RoundRobin::RoundRobin(uint32_t quantum) {
 RoundRobin::~RoundRobin() {
 }
 
-void RoundRobin::add_new_process(Process &process) {
+void RoundRobin::add_new_process(std::stringstream &stream) {
+    uint32_t id, arrival_time, burst_time;
+    stream >> id >> arrival_time >> burst_time;
+    Process process(id, arrival_time, burst_time);
     arrival_queue.push(process);
-    //process.set_priority(INT_MAX - process.get_arrival_time());
-    //queue.push(process);
 }
 
 std::string RoundRobin::get_next_event() {

@@ -13,7 +13,7 @@ Lottery::~Lottery() {
 
 }
 
-void Lottery::add_new_process(Process &process) {
+void Lottery::add_new_process(std::stringstream stream) {
 
 }
 

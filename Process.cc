@@ -7,10 +7,20 @@ Process::Process(uint32_t id, uint32_t arrival_time, uint32_t burst_time) {
 	this->burst_time = burst_time;
 }
 
+Process::Process(uint32_t id, uint32_t arrival_time, uint32_t burst_time, uint32_t period, uint32_t processing_time) {
+    this->id = id;
+    this->arrival_time = arrival_time;
+    this->burst_time = burst_time;
+    this->period = period;
+    this->processing_time = processing_time;
+}
+
 Process::Process(const Process &process) {
     this->id = process.id;
     this->arrival_time = process.arrival_time;
     this->burst_time = process.burst_time;
+    this->period = process.period;
+    this->processing_time = process.processing_time;
     this->ticket_number = process.ticket_number;
     this->resource_type = process.resource_type;
     this->priority = process.priority;
@@ -20,6 +30,8 @@ Process &Process::operator=(const Process &process) {
     this->id = process.id;
     this->arrival_time = process.arrival_time;
     this->burst_time = process.burst_time;
+    this->period = process.period;
+    this->processing_time = process.processing_time;
     this->ticket_number = process.ticket_number;
     this->resource_type = process.resource_type;
     this->priority = process.priority;
@@ -32,6 +44,10 @@ uint32_t Process::get_id() {
 
 uint32_t Process::get_arrival_time()const {
 	return arrival_time;
+}
+
+void Process::set_arrival_time(uint32_t arrival_time) {
+    this->arrival_time = arrival_time;
 }
 
 uint32_t Process::get_burst_time() {
@@ -64,4 +80,12 @@ void Process::set_priority(uint32_t priority) {
 
 uint32_t Process::get_priority() {
     return priority;
+}
+
+uint32_t Process::get_period() {
+    return period;
+}
+
+uint32_t Process::get_processing_time() {
+    return processing_time;
 }

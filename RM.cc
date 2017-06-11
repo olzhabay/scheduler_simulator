@@ -8,7 +8,7 @@ RateMonotonic::~RateMonotonic() {
 
 }
 
-void RateMonotonic::add_new_process(Process &process) {
+void RateMonotonic::add_new_process(std::stringstream &stream) {
 
 }
 

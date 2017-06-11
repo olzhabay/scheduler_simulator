@@ -8,7 +8,7 @@ EarliestDeadlineFirst::~EarliestDeadlineFirst() {
 
 }
 
-void EarliestDeadlineFirst::add_new_process(Process &process) {
+void EarliestDeadlineFirst::add_new_process(std::stringstream &stream) {
 
 }
 

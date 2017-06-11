@@ -80,21 +80,8 @@ int main(int argc, char** argv) {
         std::string line;
         getline(input, line);
         std::stringstream ss(line);
-        int id, arrival_time, burst_time;
-        ss >> id >> arrival_time >> burst_time;
-        Process process(id, arrival_time, burst_time);
-        if (!scheduler->get_type().compare("LT")) {
-            int ticket_number, resource_type;
-            ss >> ticket_number;
-            process.set_ticket_number(ticket_number);
-            if (!ss.eof()) {
-                ss >> resource_type;
-                process.set_resource_type(resource_type);
-            }
-        }
-        scheduler->add_new_process(process);
+        scheduler->add_new_process(ss);
     }
-
     while (!scheduler->is_finished()) {
         std::cout << scheduler->get_next_event();
     }

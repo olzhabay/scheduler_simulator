@@ -2,6 +2,7 @@
 
 #include <queue>
 #include <string>
+#include <sstream>
 #include <functional>
 #include "Process.hh"
 
@@ -9,7 +10,7 @@ class Scheduler {
 public:
 	Scheduler() { };
 	virtual ~Scheduler() = default;
-	virtual void add_new_process(Process&) = 0;
+	virtual void add_new_process(std::stringstream&) = 0;
 	virtual std::string get_next_event() { };
 	virtual bool is_finished() { };
 	std::string get_type() { return type; }
