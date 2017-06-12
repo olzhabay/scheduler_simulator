@@ -55,5 +55,4 @@ std::string RateMonotonic::get_next_event() {
 
 bool RateMonotonic::is_finished() {
     return time > end_time;
-
 }
