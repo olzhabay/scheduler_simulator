@@ -9,7 +9,7 @@ private:
     uint32_t processing_time = 0;
 	uint32_t ticket_number = 0;
 	uint32_t resource_type = 0;
-    uint32_t priority = 0;
+    uint32_t priority = 0; // manipulated by scheduler
 public:
     Process() {}
 	Process(uint32_t , uint32_t , uint32_t);

@@ -1,4 +1,3 @@
-#include <climits>
 #include "RR.hh"
 
 RoundRobin::RoundRobin(uint32_t quantum) {
@@ -20,7 +19,7 @@ std::string RoundRobin::get_next_event() {
     std::stringstream ss;
     while (!arrival_queue.empty() && arrival_queue.top().get_arrival_time() <= time) {
         Process process = arrival_queue.top();
-        process.set_priority(INT_MAX - process.get_arrival_time());
+        process.set_priority(INT16_MAX - process.get_arrival_time());
         arrival_queue.pop();
         queue.push(process);
     }
@@ -37,7 +36,7 @@ std::string RoundRobin::get_next_event() {
         uint32_t comp_time = quantum < process.get_burst_time() ? quantum : process.get_burst_time();
         time += comp_time;
         process.set_burst_time(process.get_burst_time() - comp_time);
-        process.set_priority(INT_MAX - time);
+        process.set_priority(INT16_MAX - time);
         if (process.get_burst_time() == 0) {
             ss << time << ": terminate P" << process.get_id() << "\n";
         } else {
