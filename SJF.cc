@@ -15,14 +15,9 @@ void ShortestJobFirst::add_new_process(std::stringstream &stream) {
     arrival_queue.push(process);
 }
 
-std::string ShortestJobFirst::get_next_event() {
+std::string ShortestJobFirst::make_tick() {
     std::stringstream ss;
-    while (!arrival_queue.empty() && arrival_queue.top().get_arrival_time() == time) {
-        Process process = arrival_queue.top();
-        arrival_queue.pop();
-        process.set_priority(INT16_MAX - process.get_burst_time());
-        queue.push(process);
-    }
+    arrive();
 
     if (queue.empty()) {
         time++;
@@ -48,3 +43,13 @@ std::string ShortestJobFirst::get_next_event() {
 bool ShortestJobFirst::is_finished() {
     return queue.empty() && arrival_queue.empty();
 }
+
+void ShortestJobFirst::arrive() {
+    while (!arrival_queue.empty() && arrival_queue.top().get_arrival_time() == time) {
+        Process process = arrival_queue.top();
+        arrival_queue.pop();
+        process.set_priority(MAX_PRIORITY - process.get_burst_time());
+        queue.push(process);
+    }
+}
+

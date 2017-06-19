@@ -83,7 +83,7 @@ int main(int argc, char** argv) {
         scheduler->add_new_process(ss);
     }
     while (!scheduler->is_finished()) {
-        std::cout << scheduler->get_next_event();
+        std::cout << scheduler->make_tick();
     }
     return 0;
 

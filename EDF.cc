@@ -16,14 +16,8 @@ void EarliestDeadlineFirst::add_new_process(std::stringstream &stream) {
     arrival_queue.push(process);
 }
 
-std::string EarliestDeadlineFirst::get_next_event() {
+std::string EarliestDeadlineFirst::make_tick() {
     std::stringstream ss;
-    while (!arrival_queue.empty() && arrival_queue.top().get_arrival_time() == time) {
-        Process process = arrival_queue.top();
-        arrival_queue.pop();
-        process.set_priority(INT16_MAX - time - process.get_period());
-        queue.push(process);
-    }
     if (queue.empty()) {
         time++;
         return ss.str();
@@ -55,4 +49,13 @@ std::string EarliestDeadlineFirst::get_next_event() {
 
 bool EarliestDeadlineFirst::is_finished() {
     return time > end_time;
+}
+
+void EarliestDeadlineFirst::arrive() {
+    while (!arrival_queue.empty() && arrival_queue.top().get_arrival_time() == time) {
+        Process process = arrival_queue.top();
+        arrival_queue.pop();
+        process.set_priority(MAX_PRIORITY - time - process.get_period());
+        queue.push(process);
+    }
 }

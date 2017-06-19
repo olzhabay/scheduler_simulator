@@ -5,12 +5,12 @@
 class RoundRobin : public Scheduler {
 private:
 	uint32_t quantum;
-    uint32_t time;
     uint32_t prev_process;
 public:
 	RoundRobin(uint32_t quantum = 0);
 	~RoundRobin();
 	void add_new_process(std::stringstream&);
-	std::string get_next_event();
+	std::string make_tick();
 	bool is_finished();
+    void arrive();
 };

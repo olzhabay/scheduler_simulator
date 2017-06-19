@@ -6,7 +6,6 @@ RateMonotonic::RateMonotonic(uint32_t end_time) {
 }
 
 RateMonotonic::~RateMonotonic() {
-
 }
 
 void RateMonotonic::add_new_process(std::stringstream &stream) {
@@ -16,14 +15,8 @@ void RateMonotonic::add_new_process(std::stringstream &stream) {
     arrival_queue.push(process);
 }
 
-std::string RateMonotonic::get_next_event() {
+std::string RateMonotonic::make_tick() {
     std::stringstream ss;
-    while (!arrival_queue.empty() && arrival_queue.top().get_arrival_time() == time) {
-        Process process = arrival_queue.top();
-        arrival_queue.pop();
-        process.set_priority(INT16_MAX - process.get_period());
-        queue.push(process);
-    }
     if (queue.empty()) {
         time++;
         return ss.str();
@@ -55,4 +48,13 @@ std::string RateMonotonic::get_next_event() {
 
 bool RateMonotonic::is_finished() {
     return time > end_time;
+}
+
+void RateMonotonic::arrive() {
+    while (!arrival_queue.empty() && arrival_queue.top().get_arrival_time() == time) {
+        Process process = arrival_queue.top();
+        arrival_queue.pop();
+        process.set_priority(MAX_PRIORITY - process.get_period());
+        queue.push(process);
+    }
 }
