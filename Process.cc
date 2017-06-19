@@ -89,3 +89,7 @@ uint32_t Process::get_period() {
 uint32_t Process::get_processing_time() {
     return processing_time;
 }
+
+void Process::burst_tick() {
+    burst_time--;
+}

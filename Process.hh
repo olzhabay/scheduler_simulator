@@ -30,4 +30,5 @@ public:
     uint32_t get_priority()const;
     uint32_t get_period();
     uint32_t get_processing_time();
+    void burst_tick();
 };
