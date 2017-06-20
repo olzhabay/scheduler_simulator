@@ -22,7 +22,7 @@ void print_usage() {
               << "LT : Lottery Scheduler\n";
 }
 
-std::shared_ptr<Scheduler> get_scheduler(std::string type, int quantum, int end_time) {
+std::shared_ptr<Scheduler> get_scheduler(std::string type, int quantum, int end_time, bool random_factor) {
     if (!type.compare("SJF")) {
         return std::make_shared<ShortestJobFirst>();
     } else if (!type.compare("RR")) {
@@ -32,7 +32,7 @@ std::shared_ptr<Scheduler> get_scheduler(std::string type, int quantum, int end_
     } else if (!type.compare("EDF")) {
         return std::make_shared<EarliestDeadlineFirst>(end_time);
     } else if (!type.compare("LT")) {
-        return std::make_shared<Lottery>();
+        return std::make_shared<Lottery>(quantum, random_factor );
     } else {
         throw "Wrong argument for scheduler_type\n";
     }
@@ -43,8 +43,9 @@ int main(int argc, char** argv) {
 	std::string type;
 	int quantum = 0;
 	int end_time = 0;
+    bool random_factor = true;
     int c;
-	while ((c = getopt(argc, argv, "i:s:q:e:")) != -1) {
+	while ((c = getopt(argc, argv, "i:s:q:e:f")) != -1) {
         switch(c) {
             case 'i':
                 file_name = optarg;
@@ -60,6 +61,8 @@ int main(int argc, char** argv) {
                 if (optarg != nullptr)
                     end_time = std::stoi(optarg);
                 break;
+            case 'f':
+                random_factor = false;
             case '?':
             default:
                 print_usage();
@@ -68,7 +71,7 @@ int main(int argc, char** argv) {
     }
     std::shared_ptr<Scheduler> scheduler;
     try {
-        scheduler = get_scheduler(type, quantum, end_time);
+        scheduler = get_scheduler(type, quantum, end_time, random_factor);
     } catch (char* exception) {
         std::cout << exception;
         print_usage();

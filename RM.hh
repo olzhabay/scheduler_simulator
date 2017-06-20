@@ -5,7 +5,6 @@
 class RateMonotonic : public Scheduler {
 private:
     int end_time;
-    uint32_t prev_process;
 public:
     RateMonotonic(uint32_t end_time = 0);
     ~RateMonotonic();

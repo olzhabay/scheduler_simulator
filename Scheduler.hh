@@ -36,6 +36,7 @@ public:
 
 protected:
     uint32_t time;
+    uint32_t prev_process;
     std::priority_queue<Process, std::vector<Process>, CompareArrival> arrival_queue;
     std::priority_queue<Process, std::vector<Process>, ComparePriority> queue;
 };

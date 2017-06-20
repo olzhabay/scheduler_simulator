@@ -18,7 +18,6 @@ void ShortestJobFirst::add_new_process(std::stringstream &stream) {
 std::string ShortestJobFirst::make_tick() {
     std::stringstream ss;
     arrive();
-
     if (queue.empty()) {
         time++;
         return ss.str();

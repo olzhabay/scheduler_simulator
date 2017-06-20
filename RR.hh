@@ -5,7 +5,6 @@
 class RoundRobin : public Scheduler {
 private:
 	uint32_t quantum;
-    uint32_t prev_process;
 public:
 	RoundRobin(uint32_t quantum = 0);
 	~RoundRobin();
